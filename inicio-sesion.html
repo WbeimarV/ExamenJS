@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: bisque;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>INICIO DE SESIÓN</h1>
+    <div class="sesion">
+        Digite su usuario
+        <br>
+        <input type="text" name="nombre" id="nombre" required>
+        <br>
+        Digite su contraseña
+        <br>
+        <input type="password" name="contraseña" id="contraseña">
+        <br>
+        <button onclick="iniciarSesion()">iniciar sesión</button>
+        <br>
+        <a href="registro.html">Registrarse</a>
+
+        <script>
+            function iniciarSesion() {
+                const nombre = document.getElementById("nombre");
+                const contraseña = document.getElementById("contraseña");
+
+                if (!nombre.value || !contraseña.value) {
+                    alert("Debe llenar todos los campos")
+                } else {
+
+                    let usuarios = Object(localStorage);
+
+                    usuario = nombre.value;
+                    usuario = usuario.toUpperCase();
+
+                    if (usuario in usuarios) {
+                        const revisarDatos = JSON.parse(localStorage.getItem(usuario));
+
+                        if (revisarDatos.contraseña === contraseña.value) {
+
+                            alert("Inicio de sesión exitoso")
+                            const usuarioActivo = {
+                                nombre: revisarDatos.nombre,
+                                correo: revisarDatos.correo,
+                            };
+                            localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
+                            
+                        }
+                        else {
+                            alert("Contraseña incorrecta")
+                        }
+                    } else { alert("Usuario no encontrado") }
+
+
+
+                    document.getElementById("nombre").value = "";
+                    document.getElementById("contraseña").value="";
+
+
+                }
+
+            }
+        </script>
+    </div>
+</body>
+
+</html>

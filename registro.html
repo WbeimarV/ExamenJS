@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: bisque;
+        }
+
+        .agregar {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">REGISTRO DE USUARIO</h1>
+    <div class="agregar">
+        Digite su nombre
+        <br>
+        <input type="text" name="nombre" id="nombre" required>
+        <br>
+        Digite su correo
+        <br>
+        <input type="text" name="correo" id="correo" required>
+        <br>
+        Digite su contraseña
+        <br>
+        <input type="password" name="contraseña" id="contraseña">
+        <br>
+        <button onclick="formulario()">Registrarse</button>
+        <br>
+        <a href="inicio-sesion.html">Iniciar sesión</a>
+
+        <script>
+            function formulario() {
+                const nombre = document.getElementById("nombre");
+                const correo = document.getElementById("correo");
+                const contraseña = document.getElementById("contraseña");
+
+                if (!nombre.value || !correo.value || !contraseña.value) {
+                    alert("Debe llenar todos los campos")
+                } else {
+
+                    let usuarios = Object(localStorage);
+
+                    usuario = nombre.value;
+                    usuario = usuario.toUpperCase();
+
+                    if (usuario in usuarios) {
+                        alert("usuario ya registrado")
+                    }else{
+                        alert("Usuario creado correctamente");
+                    usuario = nombre.value;
+                    usuario = usuario.toUpperCase();
+
+                    const nuevoUsuario = {
+                        nombre: nombre.value,
+                        correo: correo.value,
+                        contraseña: contraseña.value,
+                        agenda: {}
+                    };
+                    localStorage.setItem(usuario, JSON.stringify(nuevoUsuario));
+
+                    document.getElementById("nombre").value = "";
+                    document.getElementById("correo").value = "";
+                    document.getElementById("contraseña").value = "";
+                    }
+
+                }
+
+            }
+        </script>
+    </div>
+</body>
+
+</html>

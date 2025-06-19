@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body h1 {
+            background-color: aqua;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>AGENDA</h1>
+    <div class="cronograma">
+        Agregar evento a tu agenda
+        <br><br>
+        Digita la fecha
+        <br>
+        <input type="date" name="dia" id="dia">
+        <br>
+        Digita hora de inicio
+        <br>
+        <input type="time" name="inicio" id="inicio" required>
+        <br>
+        Digite hora de salida
+        <br>
+        <input type="time" name="fin" id="fin" required>
+        <br>
+        Digite su evento
+        <br>
+        <input type="text" name="evento" id="evento" required>
+        <br>
+        <button onclick="evento()">Registrar Evento</button>
+    </div>
+
+    <div class="eventos">Tus eventos
+
+    </div>
+
+    <Script>
+        if (JSON.parse(localStorage.getItem("usuarioActivo"))) {
+
+
+        } else {
+            alert("No ha iniciado sesión");
+
+        }
+
+        function evento() {
+            const dia = document.getElementById("dia");
+            const inicio = document.getElementById("inicio");
+            const fin = document.getElementById("fin");
+            const evento = document.getElementById("evento")
+
+            if (!dia.value || !inicio.value || !fin.value || !evento.value) {
+                alert("Debe llenar todos los campos")
+            } else {
+                alert("evento registrado");
+
+                const fecha = dia.value;
+                
+                const eventoGuardar = {
+                    fecha: {
+                        dia: dia.value,
+                        inicio: inicio.value,
+                        fin: fin.value,
+                        evento: evento.value
+                    }
+                };
+
+                console.log(eventoGuardar);
+
+
+                const usuarioActual = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+                nombre = usuarioActual.nombre.toUpperCase();
+
+                const actualizar = JSON.parse(localStorage.getItem(nombre));
+
+                actualizar.push(eventoGuardar);
+
+
+            }
+
+        }
+
+    </Script>
+</body>
+
+</html>
